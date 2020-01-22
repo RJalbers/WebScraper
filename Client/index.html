@@ -19,7 +19,14 @@
     <script>
 
         function submitChannel() {
-            const channelValue = document.querySelector('channel-input').value;
+            const channelURL = document.querySelector('.channel-input').value;
+            fetch('http://localhost:3000/creators' , {
+                method: 'POST' ,
+                headers: {
+                    'Content-Type' : 'application/json' ,
+                },
+                body: JSON.stringify({channelURL})
+            })
             //send to server
         }
 
@@ -41,7 +48,7 @@
 
         creators.forEach(creator => {
             const card = newEL('div', {class: 'card'});
-            const title = newel('h4' , {innerText: creator});
+            const title = newEl('h4' , {innerText: creator});
             const img = newEl('img', {src: creator.img});
             card.appendChild(title);
             card.appendChild(img);
@@ -49,6 +56,7 @@
         })
 
     }
+    loadCreators()
     
     const ctr = document.querySelector('.container');
     const card = newEl('div', {class: 'card'});
